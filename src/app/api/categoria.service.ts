@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Categoria } from '../models/categoria.model';
+import { API_URL } from './api.constants';
 
-const MOCK_CATEGORIAS: Categoria[] = [
-  { id: 'c1', name: 'Frutas' },
-  { id: 'c2', name: 'Vegetais' },
-  { id: 'c3', name: 'Mercearia' }
-];
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
 
-  constructor() { }
+  private apiUrl = `${API_URL}/categories`;
+
+
+  constructor(private http: HttpClient) { }
 
   getCategorias(): Observable<Categoria[]> {
-    return of(MOCK_CATEGORIAS);
+    return this.http.get<Categoria[]>(this.apiUrl);
   }
 
+  saveCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.post<Categoria>(this.apiUrl, categoria);
+  }
+
+  updateCategoria(id: string, categoria: Categoria): Observable<Categoria> {
+    return this.http.put<Categoria>(`${this.apiUrl}/${id}`, categoria);
+  }
+
+  deleteCategoria(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

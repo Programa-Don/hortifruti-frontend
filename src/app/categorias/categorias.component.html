@@ -5,7 +5,7 @@
     <div class="table-header-actions">
       <h2 class="card-title">Todas as Categorias</h2>
       <div class="action-buttons">
-        <button class="btn btn-primary btn-icon">
+        <button class="btn btn-primary btn-icon" (click)="abrirModalAdicionarCategoria()">
           Adicionar Categoria
         </button>
       </div>
@@ -16,7 +16,7 @@
         <thead>
           <tr>
             <th>Nome da Categoria</th>
-            <th>ID (Mock)</th>
+            <th>ID</th>
             <th style="width: 150px;">Ações</th>
           </tr>
         </thead>
@@ -26,7 +26,7 @@
             <td>{{ cat.id }}</td>
             <td>
               <button class="btn-action edit">Editar</button>
-              <button class="btn-action delete">Excluir</button>
+              <button class="btn-action delete" (click)="deleteCategoria(cat.id)">Excluir</button>
             </td>
           </tr>
         </tbody>
@@ -38,3 +38,8 @@
     </div>
   </section>
 </div>
+
+<app-categoria-form 
+  *ngIf="showModal" 
+  (closeModal)="fecharModalAdicionarCategoria()">
+</app-categoria-form>

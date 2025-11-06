@@ -39,14 +39,13 @@
             </td>
             <td>
               <button class="btn-action edit">Editar</button>
-              <button class="btn-action delete">Excluir</button>
+              <button class="btn-action delete" (click)="deleteProduct(produto.id)">Excluir</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Paginação -->
     <div class="pagination">
       <span>Página 1 de 10</span>
       <div class="pagination-controls">

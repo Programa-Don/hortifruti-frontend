@@ -25,8 +25,17 @@ export class FornecedorFormComponent {
 
   constructor(private supplierService: SupplierService) { }
   
-  saveSupplier(supplier: Supplier) {
-    console.log('Salvando fornecedor (Mock):', supplier);
-    this.closeModal.emit();
+  saveSupplier() { 
+    console.log('Salvando fornecedor (API):', this.supplier);
+    this.supplierService.saveSupplier(this.supplier).subscribe({
+      next: (fornecedorSalvo) => {
+        console.log('Fornecedor salvo com sucesso:', fornecedorSalvo);
+        
+        this.closeModal.emit(); 
+      },
+      error: (err) => {
+        console.error('Erro ao salvar fornecedor:', err);
+      }
+    });
   }
 }

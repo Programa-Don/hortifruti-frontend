@@ -42,4 +42,21 @@ export class FornecedorListComponent implements OnInit {
     this.showModal = false;
     this.loadSuppliers(); 
   }
+  deleteSupplier(cnpj: string): void {
+  if (!confirm('Tem certeza que deseja excluir este fornecedor?')) {
+    return;
+  }
+
+  // O serviço 'deleteSupplier' espera o ID (que é o CNPJ)
+  this.supplierService.deleteSupplier(cnpj).subscribe({
+    next: () => {
+      console.log('Fornecedor deletado com sucesso');
+      // Recarrega a lista para remover o item excluído
+      this.loadSuppliers(); 
+    },
+    error: (err) => {
+      console.error('Erro ao deletar fornecedor:', err);
+    }
+  });
+}
 }

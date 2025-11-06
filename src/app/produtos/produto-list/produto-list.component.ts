@@ -39,4 +39,22 @@ export class ProdutoListComponent implements OnInit {
     this.abrirModal = false;
     this.carregarProdutos(); 
   }
+  deleteProduct(id: string): void {
+  // (Opcional: Adicionar um 'confirm()' para segurança)
+  if (!confirm('Tem certeza que deseja excluir este produto?')) {
+    return;
+  }
+
+  this.productService.deleteProduct(id).subscribe({
+    next: () => {
+      console.log('Produto deletado com sucesso');
+      // Recarrega a lista para remover o item excluído
+      this.carregarProdutos(); 
+    },
+    error: (err) => {
+      console.error('Erro ao deletar produto:', err);
+    }
+  });
+}
+  
 }

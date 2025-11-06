@@ -5,8 +5,8 @@
     <div class="table-header-actions">
       <h2 class="card-title">Status do Inventário</h2>
       <div class="action-buttons">
-        <button class="btn btn-secondary btn-icon">Filtros</button>
-        <button class="btn btn-secondary btn-icon">Exportar</button>
+        <button class="btn btn-secondary btn-icon">Registrar Entrada</button>
+        <button class="btn btn-secondary btn-icon">Registrar Saída</button>
       </div>
     </div>
 
@@ -15,30 +15,24 @@
         <thead>
           <tr>
             <th>Produto</th>
-            <th>Categoria</th>
             <th>Qtd. Atual</th>
-            <th>Qtd. Mínima</th>
-            <th>Status</th>
-          </tr>
+            <th>Data de Entrada</th>
+            <th>Data de Validade</th>
+            </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.quantity }} Unid.</td>
-            <td>{{ product.qtoMinima }} Unid.</td>
-            <td>
-              <span *ngIf="product.quantity > product.qtoMinima" class="status-tag status-tag-success">Em Estoque</span>
-              <span *ngIf="product.quantity <= product.qtoMinima && product.quantity > 0" class="status-tag status-tag-warning">Estoque Baixo</span>
-              <span *ngIf="product.quantity === 0" class="status-tag status-tag-danger">Fora de Estoque</span>
-            </td>
+          <tr *ngFor="let item of stockList">
+            <td>{{ item.productName }}</td>
+            <td>{{ item.amount }} Unid.</td>
+            <td>{{ item.entryDate | date:'dd/MM/yyyy' }}</td>
+            <td>{{ item.validity | date:'dd/MM/yyyy' }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="pagination">
-      <span>Exibindo {{ products.length }} produtos</span>
+      <span>Exibindo {{ stockList.length }} lotes</span>
     </div>
 
   </section>

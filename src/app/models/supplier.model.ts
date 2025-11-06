@@ -4,7 +4,6 @@ export interface Supplier {
   nomeFantasia: string;
   email: string;
   telefone: string;
-  status: 'Ativo' | 'Bloqueado'; // Define os valores exatos
+  status: 'Ativo' | 'Bloqueado'; 
   pendingDeliveries: number;
 }
-

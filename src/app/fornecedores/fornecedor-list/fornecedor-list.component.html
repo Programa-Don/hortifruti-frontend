@@ -39,7 +39,7 @@
             <td>{{ fornecedor.pendingDeliveries }}</td>
             <td>
               <button class="btn-action edit">Editar</button>
-              <button class="btn-action delete">Excluir</button>
+              <button class="btn-action delete" (click)="deleteSupplier(fornecedor.cnpj)">Excluir</button>
             </td>
           </tr>
         </tbody>
